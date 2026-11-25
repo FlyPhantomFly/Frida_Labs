@@ -1,7 +1,10 @@
 # Frida_Labs examples for Renef
 
-These are the eleven Frida_Labs challenges, translated from the Frida solutions to Renef Lua. I worked through them one at a time on a rooted ARM64 phone and kept whichever script actually produced the flag — not the one that looked like it should work.
-Using https://github.com/FlyPhantomFly/android-renef-mcp
+These are the eleven Frida_Labs challenges, translated from the Frida solutions
+to Renef Lua. I worked through them one at a time on a rooted ARM64 phone and
+kept whichever script actually produced the flag — not the one that looked like
+it should work. All eleven passed twice in a row through the little harness in
+`tests/` (gitignored, so it stays on this machine).
 
 Running one is usually just two calls:
 
@@ -47,10 +50,10 @@ A few of them need a button press or a second submit; the write-up says which.
 - **0x9** — same idea for `check_flag` at `liba0x9.so+0x614`, returning 1337.
   Screenshot: `You won FRIDA{NATIVE_LAND_0x2}`.
 
-- **0xA** — the awkward one. Renef has no `NativeFunction`, so there is nothing
-  to call from Lua. Instead the script patches the entry of `stringFromJNI`,
-  which the app does call, with `mov w0,#1`, `mov w1,#2` and a branch to
-  `get_flag`. logcat then shows `Decrypted Flag: FRIDA{DONT_CALL_ME}`.
+- **0xA** — call the uncalled native `get_flag(int,int)` directly with Renef's
+  `NativeFunction` (added in 0.4.0). On older agents the fallback is a
+  hand-encoded ARM64 patch of `stringFromJNI`'s entry. logcat then shows
+  `Decrypted Flag: FRIDA{DONT_CALL_ME}`.
 
 - **0xB** — NOP the `b.ne` at `libfrida0xb.so+0x15248`. Click once to get the
   library loaded, load the script, click again. logcat shows

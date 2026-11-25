@@ -2,7 +2,7 @@
 
 - A rooted ARM64 Android device with `adb` access.
 - `renef_server` running on the device and `android-renef-mcp` registered in your MCP client.
-- The challenge APK installed (`~/github/Frida_Labs/Frida 0x8/Challenge 0x8.apk`).
+- The challenge APK installed (`~/github/Frida_Labs/Frida_0x8/Challenge 0x8.apk`).
 - Basic jadx/dex skills and small Lua snippets.
 - Important: this is Renef, not Frida. There is no `Java.perform`, no `Interceptor`,
   and no `NativeFunction`. The scripts below use the Renef Lua API instead.
